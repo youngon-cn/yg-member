@@ -1,0 +1,23 @@
+.backtop {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.45);
+  transition: all 200ms;
+}
+
+.hide {
+  height: 0 !important;
+  transition: all 200ms;
+}
+
+.backtop:hover {
+  background-color: rgba(0, 0, 0, 0.85);
+}
