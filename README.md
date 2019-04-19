@@ -1,69 +1,8 @@
-## Develop
+## yg-member
+---
+### List of Youngon every grade Members
 
-```bash
-npm install
-npm start
-```
+- 注： 1998级-2013级数据来自百度百科，2014级以后的数据均来自`iYoungon`数据库，由于部分站员当时没有注册，可能该级成员会有不完整。
 
-## Release
-
-```bash
-npm run build
-```
-
-## Eslint + Prettier
-
-``` bash
-npm run fix
-```
-
-## Directory description
-
-```
-├─ config
-├─ public
-├─ scripts
-├─ src
-│  ├─ assets
-│  ├─ elements    //Store all custom elements
-│  ├─ store       //Store all this store of pages
-│  ├─ admin.js    //Entry js of compiler，will build to admin.html
-│  └─ index.js    //Entry js of compiler，will build to index.html
-```
-
-## Build Scripts
-
-```json
-"scripts": {
-    "start": "node scripts/start.js",
-    "build": "PUBLIC_URL=. node scripts/build.js",
-    "build-windows": "set PUBLIC_URL=.&& node scripts/build.js",
-    "fix": "eslint src --fix"
-}
-```
-
-You can set up the PUBLIC_URL, such as:
-
-```bash
-...
-"build": "PUBLIC_URL=https://fe.wxpay.oa.com/dv node scripts/build.js",
-"build-windows": "set PUBLIC_URL=https://fe.wxpay.oa.com/dv&& node scripts/build.js",
-...
-```
-
-## Switch omi and omio
-
-Add or remove the alias config in package.json to switch omi and omio：
-
-```js
- ...
- "alias": {
-    "omi": "omio"
-  }
-  ...
-```
-
-## License
-
-MIT 
-
+- 注册传送门：[点击这里 o(*￣▽￣*)ブ](https://auth.youngon.work/register)
+- 注册码：请联系正式站员索要
