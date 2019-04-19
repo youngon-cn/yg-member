@@ -1,20 +1,12 @@
 import { define, WeElement } from 'omi'
 import '../members-card'
 import '../components/backtop'
-import 'omiu/button'
+import { app } from '../../store/config'
 
 define('my-app', class extends WeElement {
   css = require('./_index.css')
 
-  _config = {
-    api_9813_url: 'https://member.youngon.work/member/api/9813',
-    api_af13_url: grade =>
-      `https://api.wangxuefeng.com.cn/users/get/gradestaff?grade=${grade}`,
-    grade: {
-      start: 2014,
-      end: new Date().getFullYear()
-    }
-  }
+  _config = app
 
   members = {
     m9813: [],
