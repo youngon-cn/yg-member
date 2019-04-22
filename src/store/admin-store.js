@@ -21,7 +21,7 @@ export default {
     const rs = await fetch(`${common.auth_url}/auth`, {
       method: 'POST',
       body: JSON.stringify({
-        token: this.token
+        token: decodeURIComponent(this.token)
       }),
       headers: new Headers({
         'Content-Type': 'application/json'

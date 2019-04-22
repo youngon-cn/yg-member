@@ -57,14 +57,14 @@ export function checkLogin() {
   const userInfor = Storages.getStorage('userInfo')
   const queryToken = getQueryString('token')
   return new Promise((resolve, reject) => {
-    if (userInfor && !queryToken) {
-      store.setUserInfor(userInfor)
-      resolve(store.userInfo)
-    } else if (queryToken) {
+    if (queryToken) {
       store.setToken(queryToken)
       resolve(store.getUserInfor().then(e => e))
     } else if (localToken) {
       resolve(store.getUserInfor().then(e => e))
+    } else if (userInfor) {
+      store.setUserInfor(userInfor)
+      resolve(store.userInfo)
     } else {
       resolve(false)
     }
