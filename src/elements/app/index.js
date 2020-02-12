@@ -56,7 +56,6 @@ define('my-app', class extends WeElement {
   }
 
   render() {
-    const { start, end } = this._config.grade
     return (
       <div class="app">
         <h1 class="title">天津商业大学阳光网站</h1>

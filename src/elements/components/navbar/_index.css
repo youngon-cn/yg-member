@@ -35,6 +35,13 @@
   top: 60px;
   left: 20px;
   cursor: pointer;
+  transition: all 300ms;
+}
+
+.icon.menu.move-fix {
+  top: 4px;
+  left: 4px;
+  transition: all 300ms;
 }
 
 .navbar::-webkit-scrollbar{

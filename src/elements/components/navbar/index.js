@@ -4,7 +4,7 @@ define('navbar', class extends WeElement {
   css = require('./_index.css')
 
   showNavBar = false
-
+  needMove = false
   navBarOpenId = ['openNavMenu', 'navbar']
 
   installed() {
@@ -18,6 +18,11 @@ define('navbar', class extends WeElement {
         this.showNavBar = false
         this.update()
       }
+    })
+    window.addEventListener('scroll', () => {
+      const top = document.body.scrollTop || document.documentElement.scrollTop
+      this.needMove = top >= 100
+      this.update()
     })
   }
 
@@ -41,7 +46,7 @@ define('navbar', class extends WeElement {
       <div class="wrap">
         <svg
           t="1581490526564"
-          class="icon menu"
+          class={this.needMove ? 'icon menu move-fix' : 'icon menu'}
           id="openNavMenu"
           viewBox="0 0 1024 1024"
           version="1.1"
