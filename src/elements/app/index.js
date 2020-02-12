@@ -1,6 +1,7 @@
 import { define, WeElement } from 'omi'
 import '../members-card'
 import '../components/backtop'
+import '../components/navbar'
 import { app } from '../../store/config'
 
 define('my-app', class extends WeElement {
@@ -55,12 +56,15 @@ define('my-app', class extends WeElement {
   }
 
   render() {
+    const { start, end } = this._config.grade
     return (
       <div class="app">
         <h1 class="title">天津商业大学阳光网站</h1>
         <h2 class="subtitle">历届站员名单</h2>
-        <members-card members={this.members.maf13} />
-        <members-card members={this.members.m9813} />
+        <members-card
+          members={[...this.members.m9813, ...this.members.maf13]}
+        />
+        <navbar />
         <backtop />
       </div>
     )

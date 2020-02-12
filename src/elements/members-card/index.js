@@ -41,7 +41,12 @@ define('members-card', class extends WeElement {
       <div class="wrap" flex flex-column-reverse justify-content-center>
         {props.members.map(e => (
           <div>
-            <p class="grade" flex justify-content-space-between>
+            <p
+              class="grade"
+              id={`grade-${e.grade}`}
+              flex
+              justify-content-space-between
+            >
               <span>{`${e.grade}级`}</span>
               <span>{e.count ? `${e.count}` : e.members.length}人</span>
             </p>

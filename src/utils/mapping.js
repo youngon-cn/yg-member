@@ -8,14 +8,14 @@
  * @return {Object} To Object
  */
 
-var ARRAYTYPE = '[object Array]'
-var OBJECTTYPE = '[object Object]'
+let ARRAYTYPE = '[object Array]'
+let OBJECTTYPE = '[object Object]'
 
 function mapping(from, to, rule) {
-  var tempRule = Object.assign({}, rule)
-  var res = to || {}
-  Object.keys(from).forEach(function (key) {
-    var obj = from[key]
+  let tempRule = Object.assign({}, rule)
+  let res = to || {}
+  Object.keys(from).forEach(key => {
+    let obj = from[key]
     if (isArray(obj)) {
       res[key] = res[key] || []
       arrayMapping(obj, res[key], tempRule, key)
@@ -27,27 +27,27 @@ function mapping(from, to, rule) {
     }
   })
 
-  rule && Object.keys(tempRule).forEach(function (key) {
-    var arr = key
-      .replace(/]/g, '')
-      .replace(/\[/g, '.')
-      .split('.')
+  rule &&
+    Object.keys(tempRule).forEach(key => {
+      let arr = key
+        .replace(/]/g, '')
+        .replace(/\[/g, '.')
+        .split('.')
 
-    if (arr.length === 1) {
-      res[key] = tempRule[key].call ? tempRule[key].call(from) : tempRule[key]
-      delete tempRule[key]
-    }
-  })
+      if (arr.length === 1) {
+        res[key] = tempRule[key].call ? tempRule[key].call(from) : tempRule[key]
+        delete tempRule[key]
+      }
+    })
 
   return res
 }
-
 
 function arrayMapping(from, to, rule, path) {
   if (from.length < to.length) {
     to.length = from.length
   }
-  from.forEach(function (item, index) {
+  from.forEach((item, index) => {
     if (isArray(item)) {
       to[index] = to[index] || []
       arrayMapping(item, to[index], rule, path + '[' + index + ']')
@@ -58,29 +58,31 @@ function arrayMapping(from, to, rule, path) {
     }
   })
 
+  rule &&
+    Object.keys(rule).forEach(key => {
+      let arr = key
+        .replace(/]/g, '')
+        .replace(/\[/g, '.')
+        .split('.')
+      let pathArr = path
+        .replace(/]/g, '')
+        .replace(/\[/g, '.')
+        .split('.')
 
-  rule && Object.keys(rule).forEach(function (key) {
-    var arr = key
-      .replace(/]/g, '')
-      .replace(/\[/g, '.')
-      .split('.')
-    var pathArr = path
-      .replace(/]/g, '')
-      .replace(/\[/g, '.')
-      .split('.')
-
-    var dl = arr.length - pathArr.length
-    if (dl === 1 && equalArr(arr, pathArr)) {
-      to[arr[arr.length - 1]] = rule[key].call ? rule[key].call(from) : rule[key]
-      delete rule[key]
-    }
-  })
+      let dl = arr.length - pathArr.length
+      if (dl === 1 && equalArr(arr, pathArr)) {
+        to[arr[arr.length - 1]] = rule[key].call
+          ? rule[key].call(from)
+          : rule[key]
+        delete rule[key]
+      }
+    })
 }
 
 function objMapping(from, to, rule, path) {
-  var res = to || {}
-  Object.keys(from).forEach(function (key) {
-    var obj = from[key]
+  let res = to || {}
+  Object.keys(from).forEach(key => {
+    let obj = from[key]
     if (isArray(obj)) {
       res[key] = res[key] || []
       arrayMapping(obj, res[key], rule, path + '.' + key)
@@ -92,30 +94,33 @@ function objMapping(from, to, rule, path) {
     }
   })
 
-  rule && Object.keys(rule).forEach(function (key) {
-    var arr = key
-      .replace(/]/g, '')
-      .replace(/\[/g, '.')
-      .split('.')
-    var pathArr = path
-      .replace(/]/g, '')
-      .replace(/\[/g, '.')
-      .split('.')
+  rule &&
+    Object.keys(rule).forEach(key => {
+      let arr = key
+        .replace(/]/g, '')
+        .replace(/\[/g, '.')
+        .split('.')
+      let pathArr = path
+        .replace(/]/g, '')
+        .replace(/\[/g, '.')
+        .split('.')
 
-    if (arr.length - pathArr.length === 1 && equalArr(arr, pathArr)) {
-      res[arr[arr.length - 1]] = rule[key].call ? rule[key].call(from) : rule[key]
-      if (arr.indexOf('*') === -1) {
-        delete rule[key]
+      if (arr.length - pathArr.length === 1 && equalArr(arr, pathArr)) {
+        res[arr[arr.length - 1]] = rule[key].call
+          ? rule[key].call(from)
+          : rule[key]
+        if (arr.indexOf('*') === -1) {
+          delete rule[key]
+        }
       }
-    }
-
-  })
+    })
 
   return res
 }
 
 function equalArr(arrA, arrB) {
-  var i = 0, len = arrB.length
+  let i = 0,
+    len = arrB.length
   for (; i < len; i++) {
     if (arrA[i] !== arrB[i] && !(arrA[i] === '*' && !isNaN(Number(arrB[i])))) {
       return false
@@ -135,10 +140,12 @@ function isObject(obj) {
 //Compatible with older versions
 mapping.auto = mapping
 
-if (typeof exports == "object") {
+if (typeof exports == 'object') {
   module.exports = mapping
-} else if (typeof define == "function" && define.amd) {
-  define([], function () { return mapping })
+} else if (typeof define == 'function' && define.amd) {
+  define([], () => {
+    return mapping
+  })
 } else {
   window.mapping = mapping
 }

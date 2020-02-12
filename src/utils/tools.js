@@ -72,9 +72,7 @@ export function checkLogin() {
 }
 
 export function gotoLogin() {
-  window.location.href = `${common.auth_url}/?${common.query_param_name}=${
-    document.URL
-  }`
+  window.location.href = `${common.auth_url}/?${common.query_param_name}=${document.URL}`
 }
 
 export class Storages {
