@@ -38,7 +38,7 @@ define('members-card', class extends WeElement {
 
   render(props, data) {
     return (
-      <div class="wrap" flex flex-column-reverse justify-content-center>
+      <div class="wrap" flex flex-column justify-content-center>
         {props.members.map(e => (
           <div>
             <p

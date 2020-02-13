@@ -2,6 +2,7 @@ import { define, WeElement } from 'omi'
 import '../members-card'
 import '../components/backtop'
 import '../components/navbar'
+import '../components/footer'
 import { app } from '../../store/config'
 
 define('my-app', class extends WeElement {
@@ -15,8 +16,7 @@ define('my-app', class extends WeElement {
   }
 
   install() {
-    this.getM9813()
-    this.getMAF13()
+    Promise.all([this.getM9813(), this.getMAF13()])
   }
 
   async getGrade(grade) {
@@ -25,7 +25,7 @@ define('my-app', class extends WeElement {
   }
 
   getM9813() {
-    fetch(this._config.api_9813_url)
+    return fetch(this._config.api_9813_url)
       .then(rs => rs.json())
       .then(rs => {
         this.members.m9813 = rs.members
@@ -41,7 +41,7 @@ define('my-app', class extends WeElement {
     const req = reqArray.reduce((t, cv) => {
       return [...t, this.getGrade(cv)]
     }, [])
-    Promise.all(req).then(rs => {
+    return Promise.all(req).then(rs => {
       rs.forEach((e, i) => {
         if (e.status) {
           this.members.maf13[i] = {
@@ -56,13 +56,13 @@ define('my-app', class extends WeElement {
   }
 
   render() {
+    const members = [...this.members.m9813, ...this.members.maf13].reverse()
     return (
       <div class="app">
         <h1 class="title">天津商业大学阳光网站</h1>
         <h2 class="subtitle">历届站员名单</h2>
-        <members-card
-          members={[...this.members.m9813, ...this.members.maf13]}
-        />
+        <members-card members={members} />
+        <footer />
         <navbar />
         <backtop />
       </div>
