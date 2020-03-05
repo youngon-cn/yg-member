@@ -62,9 +62,9 @@ define('my-app', class extends WeElement {
         <h1 class="title">天津商业大学阳光网站</h1>
         <h2 class="subtitle">历届站员名单</h2>
         <members-card members={members} />
-        <footer />
-        <navbar />
-        <backtop />
+        <yg-footer />
+        <yg-navbar />
+        <yg-backtop />
       </div>
     )
   }

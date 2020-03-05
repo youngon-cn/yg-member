@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background-color: rgba(168, 182, 189, 0.45);
+}
+
+.bg-img {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  background-image: url(https://pub.wangxuefeng.com.cn/asset/img/bg102.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  word-break: break-all;
+  overflow-x: hidden;
+}

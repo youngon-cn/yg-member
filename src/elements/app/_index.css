@@ -1,3 +1,5 @@
+@import url('../../assets/index.css');
+
 .title, .subtitle {
   color: gray;  
   text-align: center;  

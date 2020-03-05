@@ -1,6 +1,6 @@
 import { define, WeElement } from 'omi'
 
-define('backtop', class extends WeElement {
+define('yg-backtop', class extends WeElement {
   css = require('./_index.css')
   needBack = false
 

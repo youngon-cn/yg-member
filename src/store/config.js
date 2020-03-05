@@ -13,7 +13,8 @@ export const app = {
   grade: {
     start: 2014,
     end: new Date().getFullYear()
-  }
+  },
+  account: 'https://api.wangxuefeng.com.cn/index/index/account'
 }
 
 export const members_card = {

@@ -1,3 +1,5 @@
+@import url('../../../assets/index.css');
+
 .backtop {
   position: fixed;
   display: flex;

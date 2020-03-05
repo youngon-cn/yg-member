@@ -1,6 +1,5 @@
 import { render } from 'omi'
-import './assets/index.css'
-import './elements/hello'
-import store from './store/admin-store'
+import './elements/admin'
+import './assets/common.css'
 
-render(<hello-element />, '#root', store)
+render(<yg-admin />, '#root')

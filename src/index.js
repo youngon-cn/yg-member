@@ -1,5 +1,5 @@
 import { render } from 'omi'
-import './assets/index.css'
 import './elements/app'
+import './assets/common.css'
 
 render(<my-app />, '#root')

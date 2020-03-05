@@ -3,7 +3,7 @@ import { checkLogin, gotoLogin, getUtype } from '../../utils/tools'
 import { common } from '../../store/config'
 import store from '../../store/admin-store'
 
-define('hello-element', class extends WeElement {
+define('yg-admin', class extends WeElement {
   css = require('./_index.css')
   user = {}
   isLogin = false

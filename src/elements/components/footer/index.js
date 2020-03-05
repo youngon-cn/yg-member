@@ -1,6 +1,6 @@
 import { define, WeElement } from 'omi'
 
-define('footer', class extends WeElement {
+define('yg-footer', class extends WeElement {
   css = require('./_index.css')
 
   backupNumber = '陇ICP备16002668号'
