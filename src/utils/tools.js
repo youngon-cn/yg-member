@@ -59,8 +59,10 @@ export function checkLogin() {
   return new Promise((resolve, reject) => {
     if (queryToken) {
       store.setToken(queryToken)
+      Storages.setStorage('token', queryToken)
       resolve(store.getUserInfor().then(e => e))
     } else if (localToken) {
+      store.setToken(localToken)
       resolve(store.getUserInfor().then(e => e))
     } else if (userInfor) {
       store.setUserInfor(userInfor)

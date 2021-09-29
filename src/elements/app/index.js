@@ -11,12 +11,22 @@ define('my-app', class extends WeElement {
   _config = app
 
   members = {
-    m9813: [],
-    maf13: []
+    m9813: JSON.parse(sessionStorage.getItem('members-m9813') || '[]'),
+    maf13: JSON.parse(sessionStorage.getItem('members-maf13') || '[]')
   }
 
   install() {
-    Promise.all([this.getM9813(), this.getMAF13()])
+    const noM9813 = !this.members.m9813
+      || !Array.isArray(this.members.m9813)
+      || this.members.m9813.length === 0
+
+    const noMaf13 = !this.members.maf13
+      || !Array.isArray(this.members.maf13)
+      || this.members.maf13.length === 0
+
+    if (noM9813 || noMaf13) {
+      Promise.all([this.getM9813(), this.getMAF13()])
+    }
   }
 
   async getGrade(grade) {
@@ -29,6 +39,7 @@ define('my-app', class extends WeElement {
       .then(rs => rs.json())
       .then(rs => {
         this.members.m9813 = rs.members
+        sessionStorage.setItem('members-m9813', JSON.stringify(rs.members))
         this.update()
       })
   }
@@ -51,6 +62,7 @@ define('my-app', class extends WeElement {
           }
         }
       })
+      sessionStorage.setItem('members-maf13', JSON.stringify(this.members.maf13))
       this.update()
     })
   }

@@ -18,5 +18,6 @@ export const app = {
 }
 
 export const members_card = {
-  admission_url: stuid => `https://member.youngon.work/admission/${stuid}/en_US`
+  admission_url: stuid => `https://member.youngon.work/admission/${stuid}/en_US`,
+  card_url: stuid => `https://member.youngon.work/card/${stuid}/`,
 }
