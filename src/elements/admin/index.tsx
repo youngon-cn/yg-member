@@ -23,7 +23,7 @@ define('yg-admin', class extends WeElement {
   }
 
   enter = () => {
-    window.location.href = '/card.html'
+    window.location.href = '/cards.html'
   }
 
   logout = () => {
