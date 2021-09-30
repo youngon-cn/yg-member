@@ -1,4 +1,6 @@
 import { OC, OH } from 'omi-tools';
+import '@omiu/tabs'
+import '@omiu/switch'
 import { checkLogin, gotoLogin } from '../../utils/tools'
 import { common, members_card, app } from '../../store/config'
 import Logout from './logout'
@@ -32,6 +34,12 @@ const FullScreenTips = OC.makeFC(
   commonOptions
 )
 
+const LittleLoading = OC.makeFC(
+  'little-loading',
+  () => <div class="abscenter"> <img src={loadingImg} style="width:100px;height:100px;" /></div>,
+  commonOptions
+)
+
 const Loading = OC.makeFC(
   'loading',
   () => <FullScreenTips> <img src={loadingImg} style="width:100px;height:100px;" /></FullScreenTips>,
@@ -43,36 +51,71 @@ const YGCardPage = OC.makeFC('yg-card-page', (props, store, ctx) => {
   OH.useEffect(() => {
     checkLogin().then(rs => {
       rs ? (ctx.user = rs, ctx.update()) : gotoLogin()
-
-      console.dir(ctx)
     })
   }, [], ctx)
+
+  const onTabChange = (e) => {
+    ctx.setState({ loading: true, currentGrade: e.detail.index })
+    setTimeout(() => {
+      ctx.setState({ loading: false })
+    }, 2600)
+  }
 
   return ctx.user && ctx.members && ctx.members.maf13 ? [4, 5].includes(ctx.user.utype)
     ? (
       <div class="card-wrap">
-        <Logout logout={() => logout(ctx)} />
-        {
-          ctx.members.maf13.reverse().map(grade => (
-            <div class="card-container" key={grade}>
-              <h3>{grade.grade}级</h3>
-              <div class="card-content">
-                {
-                  grade.members.map(user => (
-                    <YGCardItem
-                      stuid={user.stuid}
-                      v={ctx.v}
-                      fr={ctx.fr}
-                      light={ctx.light}
-                      key={user.stuid}
-                    />
-                  ))
-                }
-              </div>
-            </div>
-          ))
-        }
-
+        <div class="tab-nav">
+          <o-tabs
+            list={JSON.stringify(ctx.members.maf13.map((grade, index) => ({ label: `${grade.grade}级`, index })))}
+            active-index={ctx.currentGrade}
+            onChange={onTabChange}
+          >
+          </o-tabs>
+          <Logout logout={() => logout(ctx)} />
+        </div>
+        <div class="ctrl">
+          <span style="display:flex;align-items: center;margin: 0 20px;">
+            <o-switch
+              css="*{cursor: pointer}"
+              onChange={(e) => ctx.setState({ v: e.detail ? 2 : 1 })}
+              style="margin-right:10px;"
+            ></o-switch>
+            <span style="font-size: 14px;color: #919191;">切换版本</span>
+          </span>
+          <span style="display:flex;align-items: center;margin: 0 20px;">
+            <o-switch
+              css="*{cursor: pointer}"
+              onChange={(e) => ctx.setState({ light: e.detail })}
+              style="margin-right:10px;"
+              disabled={ctx.v !== 2}
+            ></o-switch>
+            <span style="font-size: 14px;color: #919191;">切换LOGO</span>
+          </span>
+          <span style="display:flex;align-items: center;margin: 0 20px;">
+            <o-switch
+              css="*{cursor: pointer}"
+              onChange={(e) => ctx.setState({ fr: e.detail })}
+              style="margin-right:10px;"
+            ></o-switch>
+            <span style="font-size: 14px;color: #919191;">刷新工卡</span>
+          </span>
+        </div>
+        <div class="card-container" key={ctx.currentGrade}>
+          {ctx.loading && <LittleLoading />}
+          <div class="card-content" style={{ visibility: ctx.loading ? 'hidden' : 'visible' }}>
+            {
+              ctx.members.maf13[ctx.currentGrade].members.map(user => (
+                <YGCardItem
+                  stuid={user.stuid}
+                  v={ctx.v}
+                  fr={ctx.fr}
+                  light={ctx.light}
+                  key={user.stuid}
+                />
+              ))
+            }
+          </div>
+        </div>
       </div>
     )
     : <FullScreenTips>
@@ -84,6 +127,16 @@ const YGCardPage = OC.makeFC('yg-card-page', (props, store, ctx) => {
   ...commonOptions,
   install() {
     this._config = app
+    this.loading = false
+    this.currentGrade = 0
+    this.v = 1
+    this.light = false
+    this.fr = false
+
+    this.setState = (state) => {
+      Object.keys(state).forEach(key => this[key] = state[key])
+      this.update()
+    }
 
     this.members = { maf13: JSON.parse(sessionStorage.getItem('members-maf13') || '[]') }
 
