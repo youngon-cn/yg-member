@@ -10,7 +10,8 @@ export default {
       input: {
         main: resolve(__dirname, "index.html"),
         admin: resolve(__dirname, "admin.html"),
-        cards: resolve(__dirname, "cards.html")
+        cards: resolve(__dirname, "cards.html"),
+        account: resolve(__dirname, "account.html")
       }
     }
   }
