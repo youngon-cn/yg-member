@@ -1,4 +1,4 @@
-import { define, WeElement } from 'omi'
+import { define, WeElement, h } from 'omi'
 import { common, members_card } from '../../store/config'
 import { getUtype } from '../../utils/tools'
 import style from './_index.css'

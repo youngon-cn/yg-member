@@ -3,11 +3,11 @@ import { getUtype, sex, Storages } from '../utils/tools'
 export default {
   token: '',
   userInfo: {},
-  setToken(token) {
+  setToken(token: string) {
     this.token = token
     Storages.setStorage('token', token)
   },
-  setUserInfor(user) {
+  setUserInfor(user: any) {
     this.userInfo = user
     Storages.setStorage('userInfo', user)
   },

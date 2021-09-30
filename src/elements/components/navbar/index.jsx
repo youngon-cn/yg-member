@@ -1,7 +1,8 @@
-import { define, WeElement } from 'omi'
+import { define, WeElement, h } from 'omi'
+import css from './_index.css'
 
 define('yg-navbar', class extends WeElement {
-  css = require('./_index.css')
+  css = css
 
   showNavBar = false
   needMove = false

@@ -1,6 +1,6 @@
 import store from '../store/admin-store'
 import { common } from '../store/config'
-export function getUtype(utype) {
+export function getUtype(utype: number) {
   /* eslint-disable indent */
   let res = '天商学子'
   switch (Number(utype)) {
@@ -26,7 +26,7 @@ export function getUtype(utype) {
   return res
 }
 
-export function sex(e) {
+export function sex(e: number) {
   let xb = '保密'
   switch (e) {
     case 0:
@@ -45,7 +45,7 @@ export function sex(e) {
   return xb
 }
 
-export function getQueryString(name) {
+export function getQueryString(name: string) {
   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
   let r = window.location.search.substr(1).match(reg)
   if (r != null) return decodeURI(r[2])
@@ -78,7 +78,7 @@ export function gotoLogin() {
 }
 
 export class Storages {
-  static setStorage(t, e) {
+  static setStorage(t: string, e: any) {
     if (arguments.length === 2) {
       let r = e
       typeof r === 'object'
@@ -87,13 +87,13 @@ export class Storages {
       localStorage.setItem(t, r)
     }
   }
-  static getStorage(t) {
+  static getStorage(t: string) {
     let r = localStorage.getItem(t)
     if (!r) return null
     if (r.indexOf('obj-') === 0) return JSON.parse(r.slice(4))
     if (r.indexOf('str-') === 0) return r.slice(4)
   }
-  static rmStorage(t) {
+  static rmStorage(t: string) {
     localStorage.removeItem(t)
   }
   static clearStorage() {

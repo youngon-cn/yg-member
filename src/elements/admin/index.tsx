@@ -1,11 +1,12 @@
-import { define, WeElement } from 'omi'
+import { define, WeElement, h } from 'omi'
 import { checkLogin, gotoLogin, getUtype } from '../../utils/tools'
 import { common } from '../../store/config'
 import Logout from './logout'
+import css from './_index.css'
 
 define('yg-admin', class extends WeElement {
-  css = require('./_index.css')
-  user = {}
+  css = css
+  user: any = {}
   isLogin = false
   install() {
     checkLogin().then(rs => {
@@ -92,7 +93,7 @@ define('yg-admin', class extends WeElement {
               }
             />
             <div flex flex-column justify-content-center>
-              <h4 name>{this.isLogin ? this.user.name : '未登录用户'}</h4>
+              <h4 name="true">{this.isLogin ? this.user.name : '未登录用户'}</h4>
               <div class="otherinfo" flex flex-column justify-content-center>
                 <span>{this.isLogin ? this.user.department : '未知'}</span>
               </div>

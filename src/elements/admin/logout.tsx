@@ -1,5 +1,7 @@
+import { h } from 'omi'
 import { OC } from "omi-tools";
 import store from '../../store/admin-store';
+import css from './_index.css'
 
 const Logout = OC.makeFC('logout', (props) => (
   <div class="logout" title="注销登录" onClick={() => {
@@ -29,7 +31,7 @@ const Logout = OC.makeFC('logout', (props) => (
   </div>
 ),
   {
-    staticCss: require('./_index.css')
+    staticCss: css
   }
 )
 

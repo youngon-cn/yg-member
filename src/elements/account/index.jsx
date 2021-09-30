@@ -1,5 +1,6 @@
-import { define, WeElement, extend, get, set } from 'omi'
+import { define, WeElement, extend, get, set, h } from 'omi'
 import { Base64 } from 'js-base64'
+import css from './_index.css'
 import { app } from '../../store/config'
 import '../components/backtop'
 
@@ -12,7 +13,7 @@ extend('model', (el, path, scope) => {
 })
 
 define('yg-account', class extends WeElement {
-  css = require('./_index.css')
+  css = css
   stuid = ''
   password = ''
   isLoginSuccess = false

@@ -8,7 +8,7 @@ export const common = {
 
 export const app = {
   api_9813_url: 'https://member.youngon.work/member/api/9813',
-  api_af13_url: grade =>
+  api_af13_url: (grade: number) =>
     `https://api.wangxuefeng.com.cn/users/get/gradestaff?grade=${grade}`,
   grade: {
     start: 2014,
@@ -18,6 +18,6 @@ export const app = {
 }
 
 export const members_card = {
-  admission_url: stuid => `https://member.youngon.work/admission/${stuid}/en_US`,
-  card_url: stuid => `https://member.youngon.work/card/${stuid}/`,
+  admission_url: (stuid: string) => `https://member.youngon.work/admission/${stuid}/en_US`,
+  card_url: (stuid: string) => `https://member.youngon.work/card/${stuid}/`,
 }

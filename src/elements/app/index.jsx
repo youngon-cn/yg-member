@@ -1,12 +1,13 @@
-import { define, WeElement } from 'omi'
+import { define, WeElement, h } from 'omi'
 import '../members-card'
 import '../components/backtop'
 import '../components/navbar'
 import '../components/footer'
 import { app } from '../../store/config'
+import css from './_index.css'
 
 define('my-app', class extends WeElement {
-  css = require('./_index.css')
+  css = css
 
   _config = app
 
